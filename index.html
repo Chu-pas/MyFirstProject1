@@ -18,6 +18,15 @@
     --muted: #94a3b8;
   }
 
+  body.light-mode {
+    --bg: #f4f6f8;
+    --panel: #ffffff;
+    --panel-2: #eef1f4;
+    --border: #dbe2ea;
+    --white: #0b0f14;
+    --muted: #52606d;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
@@ -25,6 +34,7 @@
     color: var(--white);
     font-family: 'Inter', sans-serif;
     line-height: 1.5;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3 {
@@ -47,6 +57,11 @@
     background: rgba(11, 15, 20, 0.92);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  body.light-mode header {
+    background: rgba(244, 246, 248, 0.92);
   }
 
   .nav {
@@ -54,6 +69,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 14px 0;
+    gap: 12px;
   }
 
   .logo {
@@ -73,6 +89,30 @@
   }
 
   .nav-links a:hover { color: var(--white); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .theme-toggle {
+    background: none;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease;
+  }
+
+  .theme-toggle:hover { border-color: var(--cyan); }
 
   .nav-cta {
     background: var(--cyan);
@@ -500,7 +540,10 @@
       <a href="#why">Why Us</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="nav-cta" href="https://wa.me/2349076972932" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    <div class="nav-right">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+      <a class="nav-cta" href="https://wa.me/2349076972932" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    </div>
   </div>
 </header>
 
@@ -726,6 +769,23 @@
     <p>&copy; 2026 Chucks Laptops, Lagos. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+    themeToggle.textContent = '☀️';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    themeToggle.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+</script>
 
 </body>
 </html>
