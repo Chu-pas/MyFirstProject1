@@ -6,6 +6,7 @@
 <title>Chucks Pazzle Laptops | Quality Laptops in Lagos, Nigeria</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://sdk.monnify.com/plugin/monnify.js"></script>
 <style>
   :root {
     --bg: #0b0f14;
@@ -49,7 +50,6 @@
     padding: 0 20px;
   }
 
-  /* Header */
   header {
     position: sticky;
     top: 0;
@@ -126,7 +126,6 @@
 
   .mobile-nav-links { display: none; }
 
-  /* Hero */
   .hero {
     padding: 56px 0 48px;
     display: grid;
@@ -184,6 +183,9 @@
     border-radius: 10px;
     font-weight: 700;
     font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
   }
 
   .btn-primary {
@@ -194,6 +196,7 @@
   .btn-outline {
     border: 1px solid var(--border);
     color: var(--white);
+    background: transparent;
   }
 
   .btn-primary:hover { filter: brightness(1.08); }
@@ -256,7 +259,6 @@
     box-shadow: 0 0 6px #34d399;
   }
 
-  /* Trust strip */
   .trust-strip {
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -276,7 +278,6 @@
     font-weight: 500;
   }
 
-  /* Products */
   .section {
     padding: 64px 0;
   }
@@ -388,20 +389,43 @@
     margin-top: 2px;
   }
 
-  .product-order {
-    margin-top: auto;
-    background: var(--cyan);
-    color: #04222b;
+  .product-order, .product-pay {
+    margin-top: 8px;
     text-align: center;
     padding: 10px;
     border-radius: 8px;
     font-weight: 700;
     font-size: 13px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
   }
 
-  .product-order:hover { filter: brightness(1.08); }
+  .product-order {
+    background: var(--cyan);
+    color: #04222b;
+    margin-top: auto;
+  }
 
-  /* Why us */
+  .product-pay {
+    background: var(--amber);
+    color: #2b1a00;
+  }
+
+  .product-order:hover, .product-pay:hover { filter: brightness(1.08); }
+
+  .payment-status {
+    font-size: 11.5px;
+    text-align: center;
+    margin-top: 4px;
+    min-height: 14px;
+  }
+
+  .payment-status.success { color: #34d399; }
+  .payment-status.error { color: #f87171; }
+  .payment-status.pending { color: var(--muted); }
+
   .why-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -432,7 +456,6 @@
   .why-card h3 { font-size: 15.5px; margin-bottom: 6px; }
   .why-card p { font-size: 13px; color: var(--muted); }
 
-  /* Contact */
   .contact-panel {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -480,7 +503,6 @@
     gap: 12px;
   }
 
-  /* Footer */
   footer {
     border-top: 1px solid var(--border);
     padding: 26px 0;
@@ -513,7 +535,6 @@
     outline-offset: 2px;
   }
 
-  /* Responsive */
   @media (max-width: 860px) {
     .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; }
@@ -560,7 +581,6 @@
 
   <div class="hero-photo">
     <div class="frame">
-      <!-- Replace with your own photo filename -->
       <img src="me.jpg" alt="Chucks Pazzle, founder of Chucks Laptops" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <div class="placeholder">Add your photo here — replace "me.jpg" with your saved image filename.</div>
     </div>
@@ -582,7 +602,7 @@
     <div class="section-head">
       <span class="eyebrow">Our Collection</span>
       <h2>Available Laptops</h2>
-      <p>Tap "Order via WhatsApp" on any laptop below to confirm price and availability instantly.</p>
+      <p>Pay online instantly, or tap "Order via WhatsApp" to confirm price and availability directly.</p>
     </div>
 
     <div class="product-grid">
@@ -597,6 +617,8 @@
           <h3>HP EliteBook 840</h3>
           <div class="product-specs">Intel Core i5 &bull; 8GB RAM &bull; 256GB SSD</div>
           <div class="product-price">₦180,000</div>
+          <button class="product-pay" onclick="payForProduct('HP EliteBook 840', 180000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20HP%20EliteBook%20840" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -611,6 +633,8 @@
           <h3>Dell Latitude 7290</h3>
           <div class="product-specs">Intel Core i7 &bull; 16GB RAM &bull; 512GB SSD</div>
           <div class="product-price">₦265,000</div>
+          <button class="product-pay" onclick="payForProduct('Dell Latitude 7290', 265000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20Dell%20Latitude%207290" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -625,6 +649,8 @@
           <h3>Lenovo ThinkPad X1 Carbon</h3>
           <div class="product-specs">Intel Core i7 &bull; 16GB RAM &bull; 1TB SSD</div>
           <div class="product-price">₦420,000</div>
+          <button class="product-pay" onclick="payForProduct('Lenovo ThinkPad X1 Carbon', 420000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20Lenovo%20ThinkPad%20X1%20Carbon" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -639,6 +665,8 @@
           <h3>MacBook Pro 13" (M1)</h3>
           <div class="product-specs">Apple M1 &bull; 8GB RAM &bull; 256GB SSD</div>
           <div class="product-price">₦650,000</div>
+          <button class="product-pay" onclick="payForProduct('MacBook Pro 13 M1', 650000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20MacBook%20Pro%2013%20M1" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -653,6 +681,8 @@
           <h3>Asus ROG Strix G15</h3>
           <div class="product-specs">Ryzen 7 &bull; 16GB RAM &bull; RTX 3060</div>
           <div class="product-price">₦780,000</div>
+          <button class="product-pay" onclick="payForProduct('Asus ROG Strix G15', 780000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20Asus%20ROG%20Strix%20G15" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -667,6 +697,8 @@
           <h3>HP Pavilion 15</h3>
           <div class="product-specs">Intel Core i5 &bull; 8GB RAM &bull; 512GB SSD</div>
           <div class="product-price">₦210,000</div>
+          <button class="product-pay" onclick="payForProduct('HP Pavilion 15', 210000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20HP%20Pavilion%2015" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -681,6 +713,8 @@
           <h3>Dell XPS 13</h3>
           <div class="product-specs">Intel Core i7 &bull; 16GB RAM &bull; 512GB SSD</div>
           <div class="product-price">₦480,000</div>
+          <button class="product-pay" onclick="payForProduct('Dell XPS 13', 480000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20Dell%20XPS%2013" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -695,6 +729,8 @@
           <h3>Lenovo IdeaPad Slim 3</h3>
           <div class="product-specs">Ryzen 5 &bull; 8GB RAM &bull; 256GB SSD</div>
           <div class="product-price">₦195,000</div>
+          <button class="product-pay" onclick="payForProduct('Lenovo IdeaPad Slim 3', 195000, this)">💳 Pay Online</button>
+          <div class="payment-status"></div>
           <a class="product-order" href="https://wa.me/2349076972932?text=Hi%2C%20I%27m%20interested%20in%20the%20Lenovo%20IdeaPad%20Slim%203" target="_blank" rel="noopener">Order via WhatsApp</a>
         </div>
       </div>
@@ -785,6 +821,77 @@
     themeToggle.textContent = isLight ? '☀️' : '🌙';
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
   });
+
+  const BACKEND_URL = 'https://chuckspazzle-backend.onrender.com';
+  const MONNIFY_API_KEY = 'MK_TEST_VPU867CBRW';
+  const MONNIFY_CONTRACT_CODE = '3355659902';
+
+  function payForProduct(productName, amount, buttonEl) {
+    const statusEl = buttonEl.parentElement.querySelector('.payment-status');
+    statusEl.textContent = '';
+    statusEl.className = 'payment-status';
+
+    const customerName = prompt('Enter your full name for the receipt:');
+    if (!customerName) return;
+    const customerEmail = prompt('Enter your email address:');
+    if (!customerEmail) return;
+
+    const transactionReference = 'CP-' + Date.now();
+
+    MonnifySDK.initialize({
+      amount: amount,
+      currency: 'NGN',
+      reference: transactionReference,
+      customerName: customerName,
+      customerEmail: customerEmail,
+      apiKey: MONNIFY_API_KEY,
+      contractCode: MONNIFY_CONTRACT_CODE,
+      paymentDescription: productName,
+      isTestMode: true,
+      onLoadStart: () => {
+        statusEl.textContent = 'Loading payment window...';
+        statusEl.className = 'payment-status pending';
+      },
+      onLoadComplete: () => {
+        statusEl.textContent = '';
+      },
+      onComplete: function (response) {
+        statusEl.textContent = 'Verifying payment...';
+        statusEl.className = 'payment-status pending';
+        verifyPayment(response.transactionReference || transactionReference, statusEl, productName);
+      },
+      onClose: function () {
+        statusEl.textContent = 'Payment window closed.';
+        statusEl.className = 'payment-status error';
+      }
+    });
+  }
+
+  async function verifyPayment(transactionReference, statusEl, productName) {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/verify-payment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ transactionReference })
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        statusEl.textContent = `✅ Payment confirmed! ₦${data.amountPaid.toLocaleString()} received.`;
+        statusEl.className = 'payment-status success';
+
+        const msg = encodeURIComponent(`Payment confirmed for ${productName}. Reference: ${transactionReference}`);
+        window.open(`https://wa.me/2349076972932?text=${msg}`, '_blank');
+      } else {
+        statusEl.textContent = `⚠️ Payment not confirmed (${data.status || 'unknown status'}). Contact us if you were charged.`;
+        statusEl.className = 'payment-status error';
+      }
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = '⚠️ Could not verify payment. Please contact us with your reference.';
+      statusEl.className = 'payment-status error';
+    }
+  }
 </script>
 
 </body>
